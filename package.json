@@ -4,8 +4,14 @@
   "description": "FSA-compliant promise middleware for Redux.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "make test",
-    "prepublish": "make clean build"
+    "lint": "$(npm bin)/eslint src",
+    "test": "npm run lint",
+    "clean": "$(npm bin)/rimraf dist lib",
+    "build:lib": "$(npm bin)/babel src --out-dir lib",
+    "build:umd": "LIBRARY_NAME=reduxPromise NODE_ENV=development $(npm bin)/webpack src/index.js dist/index.js --config webpack.build.js",
+    "build:umd:min": "LIBRARY_NAME=reduxPromise NODE_ENV=production $(npm bin)/webpack -p src/index.js dist/index.min.js --config webpack.build.js",
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
+    "prepublish": "npm run clean && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,15 +29,19 @@
   "author": "Andrew Clark <acdlite@me.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.6.14",
-    "babel-core": "^5.6.15",
-    "babel-eslint": "^5.0.0",
-    "chai": "^3.0.0",
-    "chai-as-promised": "^5.1.0",
-    "eslint": "^0.24.0",
-    "eslint-config-airbnb": "0.0.6",
-    "mocha": "^2.2.5",
-    "sinon": "^1.15.4"
+    "@dtrussia/eslint-config-dtrussia": "2.2.1",
+    "babel-cli": "6.3.13",
+    "babel-core": "6.3.13",
+    "babel-eslint": "6.0.4",
+    "babel-loader": "6.2.0",
+    "babel-plugin-add-module-exports": "0.1.1",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-react": "6.3.13",
+    "babel-preset-stage-0": "6.3.13",
+    "eslint": "2.10.2",
+    "eslint-plugin-react": "5.1.1",
+    "rimraf": "2.4.4",
+    "webpack": "1.12.9"
   },
   "dependencies": {
     "flux-standard-action": "^0.6.1"
