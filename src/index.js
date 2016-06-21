@@ -1,5 +1,5 @@
 import promiseMiddleware from './promise';
 
 export default angular.module('ngRedux.promise', [])
-  .factory('ngReduxPromise', promiseMiddleware)
+  .factory('promiseMiddleware', promiseMiddleware)
   .name;
