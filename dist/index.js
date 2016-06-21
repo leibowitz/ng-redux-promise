@@ -76,6 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.default = angular.module('ngRedux.promise', []).provider('ngReduxPromise', function () {
 	  return {
+	    $get: function $get() {},
 	    promiseMiddleware: _promise2.default
 	  };
 	}).name;
