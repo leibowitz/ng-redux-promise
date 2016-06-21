@@ -74,7 +74,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = angular.module('ngRedux.promise', []).factory('ngReduxPromise', _promise2.default).name;
+	exports.default = angular.module('ngRedux.promise', []).provider('ngReduxPromise', function () {
+	  return {
+	    promiseMiddleware: _promise2.default
+	  };
+	}).name;
 	module.exports = exports['default'];
 
 /***/ },
